@@ -1,0 +1,26 @@
+{
+  "name": "angular-hover-spy",
+  "version": "0.1.0",
+  "homepage": "https://github.com/abramz/angular-hover-spy",
+  "description": "AngularJS directive that enables spying on 'hover' events (mouseenter and mouseleave)",
+  "main": "src/hover-spy",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "table",
+    "tables",
+    "hover",
+    "column"
+  ],
+  "authors": [
+    "Andrew Shapro (abramz)"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.2.0-rc.2",
+    "angular-mocks": "~1.2.0-rc.2",
+    "bootstrap": "~3.0.0",
+    "angular-bootstrap": "~0.6.0",
+    "angular-ui-router": "~0.2.0"
+  }
+}
