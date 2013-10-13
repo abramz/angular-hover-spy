@@ -8,8 +8,8 @@
  *   <div hover-spy="exampleNamespace"></div>
  *     - use this to create your own event handlers,
  *     - all you have to do is listen on the $rootScope for
- *     - 'exampleNamespace:hover-spy-mouseenter' - for mouseenter events
- *     - 'exampleNamespace:hover-spy-mouseLeave' - for mouseleave events
+ *     - 'abramz.exampleNamespace:hover-spy-mouseenter' - for mouseenter events
+ *     - 'abramz.exampleNamespace:hover-spy-mouseleave' - for mouseleave events
  *   <div hover-spy="exampleNamespace" hover-spy-toggle="active"></div>
  *     - use this to toggle a class on hover,
  *     - any element with the 'hover-spy="exampleNamespace"' attribute
@@ -35,12 +35,15 @@
 
 angular.module('abramz.hoverSpy', [])
   .constant('MOUSEENTER_EVENT', 'hover-spy-mouseenter')
+  .constant('MOUSEENTER_HANDLED_EVENT', 'hover-spy-mouseenter-handled')
   .constant('MOUSELEAVE_EVENT', 'hover-spy-mouseleave')
+  .constant('MOUSELEAVE_HANDLED_EVENT', 'hover-spy-mouseleave-handled')
   .directive('hoverSpy', [
-    '$q',
     'MOUSEENTER_EVENT',
+    'MOUSEENTER_HANDLED_EVENT',
     'MOUSELEAVE_EVENT',
-    function ($q, MOUSEENTER_EVENT, MOUSELEAVE_EVENT) {
+    'MOUSELEAVE_HANDLED_EVENT',
+    function (MOUSEENTER_EVENT, MOUSEENTER_HANDLED_EVENT, MOUSELEAVE_EVENT, MOUSELEAVE_HANDLED_EVENT) {
       'use strict';
 
       /**
@@ -54,7 +57,7 @@ angular.module('abramz.hoverSpy', [])
         var NAMESPACE_SEPARATOR = ':';
 
         if (namespace && namespace.length > 0) {
-          return namespace + NAMESPACE_SEPARATOR + message;
+          return 'abramz.' + namespace + NAMESPACE_SEPARATOR + message;
         }
         return message;
       };
@@ -65,10 +68,9 @@ angular.module('abramz.hoverSpy', [])
         controllerAs: 'AbramzHoverSpyCtrl',
         controller: [
           '$log',
-          '$q',
           '$rootScope',
           '$scope',
-          function ($log, $q, $rootScope, $scope) {
+          function ($log, $rootScope, $scope) {
             /**
              * whether or not someone tried to set namespace or not
              * @type {Boolean}
@@ -226,19 +228,13 @@ angular.module('abramz.hoverSpy', [])
 
           element.on('mouseenter', function () {
             scope.$apply(function () {
-              // do not do anything if we are in passive mode
-              if (mode !== 'passive') {
-                scope.$emit(addNamespace(MOUSEENTER_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
-              }
+              scope.$emit(addNamespace(MOUSEENTER_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
             });
           });
 
           element.on('mouseleave', function () {
             scope.$apply(function () {
-              // do not do anything if we are in passive mode
-              if (mode !== 'passive') {
-                scope.$emit(addNamespace(MOUSELEAVE_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
-              }
+              scope.$emit(addNamespace(MOUSELEAVE_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
             });
           });
 
@@ -258,6 +254,7 @@ angular.module('abramz.hoverSpy', [])
               switcharoo('on');
               break;
             }
+            scope.$emit(addNamespace(MOUSEENTER_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
           };
 
           /**
@@ -276,6 +273,7 @@ angular.module('abramz.hoverSpy', [])
               switcharoo('off');
               break;
             }
+            scope.$emit(addNamespace(MOUSELEAVE_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
           };
         }
       };
