@@ -1,4 +1,4 @@
-angular-hover-spy
+Angualr Hover Spy
 ==================
 [![Build Status](https://secure.travis-ci.org/abramz/angular-hover-spy.png)](http://travis-ci.org/abramz/angular-hover-spy)
 
