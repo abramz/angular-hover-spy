@@ -9,8 +9,12 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
 ## Installing
 
   bower install --save https://github.com/abramz/angular-hover-spy.git
+  
+## Examples
 
-## Usage:
+[See examples here](http://abramz.github.io/angular-hover-spy-example)
+
+## Usage
 
 ```javascript
 angular.module('myApp', ['abramz.hoverSpy']);
@@ -22,7 +26,7 @@ angular.module('myApp', ['abramz.hoverSpy']);
                 [hover-spy-on="{string}" hover-spy-off="{string}"]]>
 ```
 
-### Examples
+### Usage Examples
 <ol>
   <li>Passive mode - will broadcast a messaage but will do nothing else.
     <ul>
