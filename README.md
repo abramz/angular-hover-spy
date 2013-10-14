@@ -133,7 +133,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
         <l1>Note: 'reverseToggleClass' and 'offClass' will be added onload
     </ul>
     <pre lang="html"><code>
-  &lt;div hover-spy hover-spy-namespace="exampleNamespace" hover-spy-toggle="!reverseToggleClass" 
+  &lt;div hover-spy hover-spy-namespace="exampleNamespace" 
+                 hover-spy-toggle="!reverseToggleClass" 
                  hover-spy-on="onClass" 
                  hover-spy-off="offClass"&gt;&lt;/div&gt;</pre></code>
   </li>
