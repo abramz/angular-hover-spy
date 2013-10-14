@@ -14,6 +14,7 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
 
 ```javascript
 angular.module('myApp', ['abramz.spyHover']);
+```
 
 ```html
 <ANY hover-spy [[hover-spy-namespace="{string}"]
