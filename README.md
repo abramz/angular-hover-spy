@@ -7,7 +7,7 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
 **Requirements:** AngularJS 1.2+ *OR* AngularJS < 1.2 and jQuery (for on/off DOM events)
 
 ## Installing
-
+<>
   bower install --save https://github.com/abramz/angular-hover-spy.git
 
 ## Usage:
@@ -37,9 +37,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
         </ul>
       </li>
     </ul>
-    <pre><code="language-html">
-  &lt;div hover-spy&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy&gt;&lt;/div&gt;</pre></code>
   </li>
   <li>Passive mode (w/ namespace) - will broadcast a message with the namespace provided, but will do nothing else.
     <ul>
@@ -54,9 +53,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
           </ul>
         </li>
     </ul>
-      <pre><code="language-html">
-    &lt;div hover-spy hover-spy-namespace="exampleNamespace"&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy hover-spy-namespace="exampleNamespace"&gt;&lt;/div&gt;</pre></code>
   </li>
   <li>Toggle mode - will broadcast a message and toggle the provided class.
     <ul>
@@ -73,9 +71,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
           </ul>
         </li>
     </ul>
-      <pre><code="language-html">
-    &lt;div hover-spy hover-spy-toggle="toggleClass"&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy hover-spy-toggle="toggleClass"&gt;&lt;/div&gt;</pre></code>
   </li>
   <li>Reverse Toggle mode - will broadcast a message and toggle the provded class.
     <ul>
@@ -93,9 +90,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
         </li>
         <l1>Note: 'reverseToggleClass' will be added onload.
     </ul>
-      <pre><code="language-html">
-    &lt;div hover-spy hover-spy-toggle="!reverseToggleClass"&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy hover-spy-toggle="!reverseToggleClass"&gt;&lt;/div&gt;</pre></code>
   </li>
   <li>OnOff mode - will broadcast a message and toggle and switch the provided classes.
     <ul>
@@ -115,9 +111,8 @@ angular.module('myApp', ['abramz.hoverSpy']);
         </li>
         <l1>Note: 'offClass' will be added onload.
     </ul>
-      <pre><code="language-html">
-    &lt;div hover-spy hover-spy-on="onClass" hover-spy-off="offClass"&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy hover-spy-on="onClass" hover-spy-off="offClass"&gt;&lt;/div&gt;</pre></code>
   </li>
   <li>Smörgåsbord (Kitchen Sink) mode - will broadcast a message with the namespace provided. and toggle the provided toggle class, and switch the provided on-off classes.
     <ul>
@@ -137,11 +132,10 @@ angular.module('myApp', ['abramz.hoverSpy']);
         </li>
         <l1>Note: 'reverseToggleClass' and 'offClass' will be added onload
     </ul>
-      <pre><code="language-html">
-    &lt;div hover-spy hover-spy-namespace="exampleNamespace" hover-spy-toggle="!reverseToggleClass" 
-                   hover-spy-on="onClass" 
-                   hover-spy-off="offClass"&gt;&lt;/div&gt;
-    </pre></code>
+    <pre lang="html"><code>
+  &lt;div hover-spy hover-spy-namespace="exampleNamespace" hover-spy-toggle="!reverseToggleClass" 
+                 hover-spy-on="onClass" 
+                 hover-spy-off="offClass"&gt;&lt;/div&gt;</pre></code>
   </li>
 </ol>
 ## How it Works
