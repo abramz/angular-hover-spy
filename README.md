@@ -4,7 +4,7 @@ Angualr Hover Spy
 
 AngularJS directive that enables spying on 'hover' events (mouseenter and mouseleave)
 
-**Requirements:** AngularJS 1.2+ *OR* AngularJS < 1.2 and jQuery (for on/off DOM events)
+**Requirements:** AngularJS
 
 ## Installing
 
