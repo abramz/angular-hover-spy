@@ -4,7 +4,7 @@ Angualr Hover Spy
 
 AngularJS directive that enables spying on 'hover' events (mouseenter and mouseleave)
 
-**Requirements:** AngularJS 1.2 *OR* Angular < 1.2 and jQuery (for on/off DOM events)
+**Requirements:** AngularJS 1.2+ *OR* AngularJS < 1.2 and jQuery (for on/off DOM events)
 
 ## Installing
 
@@ -12,9 +12,14 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
 
 ## Usage:
 
-    <ANY hover-spy [[hover-spy-namespace="{string}"]
-                    [hover-spy-toggle="{string}"]
-                    [hover-spy-on="{string}" hover-spy-off="{string}"]]>
+```javascript
+angular.module('myApp', ['abramz.spyHover']);
+
+```html
+<ANY hover-spy [[hover-spy-namespace="{string}"]
+                [hover-spy-toggle="{string}"]
+                [hover-spy-on="{string}" hover-spy-off="{string}"]]>
+```
 
 ### Examples
 1. Passive mode - will broadcast a messaage but will do nothing else.
@@ -94,11 +99,12 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
                                                       hover-spy-off="offClass"></div>
 ```
 
-##Configuration
+## How it Works
+angular-hover-spy works by adding event listeners to the element for 'mouseenter' and  'mouseleave'. On 'mouseenter' and 'mouseleave', angular-hover-spy will '$emit' an event on '$rootScope' to the namespace provided in the 'hover-spy-namepsace' attribute, to a default namespace provided in the scope of the element, or without a namespace if neither are provided. From there a few things can happen
+  1. Your custom event handlers can listen on '$rootScope' for these '$emit'ted messages and handle them however you want.
+  2. You can provided various attributes to the element to have hover-spy do things for you (see the examples above). When you provide a 'hover-spy-toggle' or 'hover-spy-on' and 'hover-spy-off', angular-hover-spy will '$emit' an 'event-handled' message as well.
 
-
-##Credits
-
+Since every instance of 'hover-spy' also listens for events on the namespace you provide, you can have 2 different elements aware of the other's hover events.
 
 ##License
 
