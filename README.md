@@ -23,83 +23,127 @@ angular.module('myApp', ['abramz.hoverSpy']);
 ```
 
 ### Examples
-1. Passive mode - will broadcast a messaage but will do nothing else.
-    * mouseenter
-        * broadcasts 'abramz.:hover-spy-mouseenter'
-    * mouseleave
-        * broadcasts 'abramz.:hover-spy-mouseleavae'
-
-```html
-<div hover-spy></div>
-```
-
-2. Passive mode (w/ namespace) - will broadcast a message with the namespace provided, but will do nothing else.
-    * mouseenter
-        * broadcasts 'abramz.exampleNamespace:hover-spy-mouseenter'
-    * mouseleave
-        * broadcasts 'abramz.exampleNamespace:hover-spy-mouseleave'
-
-```html
-<div hover-spy hover-spy-namespace="exampleNamespace"></div>
-```
-
-3. Toggle mode - will broadcast a message and toggle the provided class.
-    * mouseenter
-        * broadcasts 'abramz.:hover-spy-mouseenter'
-        * adds 'toggleClass'
-    * mouseleave
-        * broadcasts 'abramz.:hover-spy-mouseleave'
-        * removes 'toggleClass'
-
-```html
-<div hover-spy hover-spy-toggle="toggleClass"></div>
-```
-
-4. Reverse Toggle mode - will broadcast a message and toggle the provded class.
-    * mouseenter
-        * broadcasts 'abramz.:hover-spy-mouseenter'
-        * removes 'reverseToggleClass'
-    * mouseleave 
-        * broadcasts 'abramz.:hover-spy-mouseleavae'
-        * adds 'reverseToggleClass'
-    * Note: 'reverseToggleClass' will be added onload
-
-```html
-<div hover-spy hover-spy-toggle="!reverseToggleClass"></div>
-```
-
-5. OnOff mode - will broadcast a message and toggle and switch the provided classes.
-    * mouseenter
-        * broadcasts 'abramz.:hover-spy-mouseenter'
-        * adds 'onClass'
-        * removes 'offClass'
-    * mouseleave
-        * broadcasts 'abramz.:hover-spy-mouseleavae'
-        * adds 'offClass'
-        * removes 'onClass'
-    * Note: 'offClass' will be added onload
-
-```html
-<div hover-spy hover-spy-on="onClass" hover-spy-off="offClass"></div>
-```
-
-6. Smörgåsbord (Kitchen Sink) mode - will broadcast a message with the namespace provided. and toggle the provided toggle class, and switch the provided on-off classes.
-    * mouseenter
-        * broadcasts 'abramz.exampleNamespace:hover-spy-mouseenter'
-        * adds 'onClass'
-        * removes 'reverseToggleClass' and 'offClass'
-    * mouseleave
-        * broadcasts 'abramz.exampleNamespace:hover-spy-mouseleavae'
-        * adds 'reverseToggleClass' and 'offClass'
-        * removes 'onClass'
-    * Note: 'reverseToggleClass' and 'offClass' will be added onload
-
-```html
-<div hover-spy hover-spy-namespace="exampleNamespace" hover-spy-toggle="!reverseToggleClass" 
-                                                      hover-spy-on="onClass" 
-                                                      hover-spy-off="offClass"></div>
-```
-
+<ol>
+  <li>Passive mode - will broadcast a messaage but will do nothing else.
+    <ul>
+      <li>mouseenter
+        <ul>
+          <li>broadcasts 'abramz.:hover-spy-mouseenter'</li>
+        </ul>
+      </li>
+      <li>mouseleave
+        <ul>
+          <li>broadcasts 'abramz.:hover-spy-mouseleavae'</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code="language-html">
+  &lt;div hover-spy&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+  <li>Passive mode (w/ namespace) - will broadcast a message with the namespace provided, but will do nothing else.
+    <ul>
+        <li>mouseenter
+          <ul>
+            <li>broadcasts 'abramz.exampleNamespace:hover-spy-mouseenter'</li>
+          </ul>
+        </li>
+        <li>mouseleave
+          <ul>
+            <li>broadcasts 'abramz.exampleNamespace:hover-spy-mouseleavae'</li>
+          </ul>
+        </li>
+    </ul>
+      <pre><code="language-html">
+    &lt;div hover-spy hover-spy-namespace="exampleNamespace"&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+  <li>Toggle mode - will broadcast a message and toggle the provided class.
+    <ul>
+        <li>mouseenter
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseenter'</li>
+            <li>adds 'toggleClass'</li>
+          </ul>
+        </li>
+        <li>mouseleave
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseleavae'</li>
+            <li>removes 'toggleClass'</li>
+          </ul>
+        </li>
+    </ul>
+      <pre><code="language-html">
+    &lt;div hover-spy hover-spy-toggle="toggleClass"&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+  <li>Reverse Toggle mode - will broadcast a message and toggle the provded class.
+    <ul>
+        <li>mouseenter
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseenter'</li>
+            <li>removes 'reverseToggleClass'</li>
+          </ul>
+        </li>
+        <li>mouseleave
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseleavae'</li>
+            <li>adds 'reverseToggleClass'</li>
+          </ul>
+        </li>
+        <l1>Note: 'reverseToggleClass' will be added onload.
+    </ul>
+      <pre><code="language-html">
+    &lt;div hover-spy hover-spy-toggle="!reverseToggleClass"&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+  <li>OnOff mode - will broadcast a message and toggle and switch the provided classes.
+    <ul>
+        <li>mouseenter
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseenter'</li>
+            <li>adds 'onClass'</li>
+            <li>removes 'offClass'</li>
+          </ul>
+        </li>
+        <li>mouseleave
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseleavae'</li>
+            <li>adds 'offClass'</li>
+            <li>removes 'onClass'</li>
+          </ul>
+        </li>
+        <l1>Note: 'offClass' will be added onload.
+    </ul>
+      <pre><code="language-html">
+    &lt;div hover-spy hover-spy-on="onClass" hover-spy-off="offClass"&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+  <li>Smörgåsbord (Kitchen Sink) mode - will broadcast a message with the namespace provided. and toggle the provided toggle class, and switch the provided on-off classes.
+    <ul>
+        <li>mouseenter
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseenter'</li>
+            <li>adds 'onClass'</li>
+            <li>removes 'reverseToggleClass' and 'offClass'</li>
+          </ul>
+        </li>
+        <li>mouseleave
+          <ul>
+            <li>broadcasts 'abramz.:hover-spy-mouseleavae'</li>
+            <li>adds 'reverseToggleClass' and 'offClass'</li>
+            <li>removes 'onClass'</li>
+          </ul>
+        </li>
+        <l1>Note: 'reverseToggleClass' and 'offClass' will be added onload
+    </ul>
+      <pre><code="language-html">
+    &lt;div hover-spy hover-spy-namespace="exampleNamespace" hover-spy-toggle="!reverseToggleClass" 
+                   hover-spy-on="onClass" 
+                   hover-spy-off="offClass"&gt;&lt;/div&gt;
+    </pre></code>
+  </li>
+</ol>
 ## How it Works
 angular-hover-spy works by adding event listeners to the element for 'mouseenter' and  'mouseleave'. On 'mouseenter' and 'mouseleave', angular-hover-spy will '$emit' an event on '$rootScope' to the namespace provided in the 'hover-spy-namepsace' attribute, to a default namespace provided in the scope of the element, or without a namespace if neither are provided. From there a few things can happen
   1. Your custom event handlers can listen on '$rootScope' for these '$emit'ted messages and handle them however you want.
