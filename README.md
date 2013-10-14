@@ -7,7 +7,7 @@ AngularJS directive that enables spying on 'hover' events (mouseenter and mousel
 **Requirements:** AngularJS 1.2+ *OR* AngularJS < 1.2 and jQuery (for on/off DOM events)
 
 ## Installing
-<>
+
   bower install --save https://github.com/abramz/angular-hover-spy.git
 
 ## Usage:
@@ -135,8 +135,7 @@ angular.module('myApp', ['abramz.hoverSpy']);
     <pre lang="html"><code>
   &lt;div hover-spy hover-spy-namespace="exampleNamespace" 
                  hover-spy-toggle="!reverseToggleClass" 
-                 hover-spy-on="onClass" 
-                 hover-spy-off="offClass"&gt;&lt;/div&gt;</pre></code>
+                 hover-spy-on="onClass" hover-spy-off="offClass"&gt;&lt;/div&gt;</pre></code>
   </li>
 </ol>
 ## How it Works
