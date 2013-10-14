@@ -24,7 +24,7 @@ module.exports = function (grunt) {
       options: {
         banner: '<%= banner %>',
         report: 'gzip',
-        sourceMap: 'build/hover-spy.min.map.js'
+        sourceMap: 'build/hover-spy.min.js.map'
       },
       build: {
         src: 'src/hover-spy.js',
