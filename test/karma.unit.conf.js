@@ -17,6 +17,17 @@ module.exports = function(config) {
       'hover-spy.spec.js'
     ],
 
+    preprocessors: {
+        '../src/**.js': 'coverage'
+    },
+
+    coverageReporter: {
+      type : 'html',
+      dir : '../coverage/'
+    },
+
+    reporters: ['coverage'],
+
     // list of files / patterns to exclude
     exclude: [],
 

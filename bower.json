@@ -18,7 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "angular": "~1.2.0-rc.2",
-    "angular-mocks": "~1.2.0-rc.2"
+    "angular-mocks": "~1.2.0-rc.2",
+    "angular-scenario": "1.2.0-rc.2"
   },
   "ignore": [
     "node_modules",

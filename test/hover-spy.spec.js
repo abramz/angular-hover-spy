@@ -47,6 +47,44 @@ describe('hover-spy', function () {
   });
 
   describe('AbramzHoverSpyCtrl', function () {
+    it('should not initialize more than once', function () {
+      element = createElement();
+      expect(element.controller('hoverSpy')).toBeDefined();
+      var HoverSpyCtrl = element.controller('hoverSpy');
+      expect(HoverSpyCtrl.initialize()).toBe(false);
+    });
+
+    it('should have an addNamespace function', function () {
+      element = createElement();
+      expect(element.controller('hoverSpy')).toBeDefined();
+      var HoverSpyCtrl = element.controller('hoverSpy');
+      expect(HoverSpyCtrl).toBeDefined();
+      expect(HoverSpyCtrl.addNamespace).toBeDefined();
+    });
+
+    describe('AbramzHoverSpyCtrl.addNamespace', function () {
+      it('should return the message with the provided namespace prepended', function () {
+        element = createElement();
+        expect(element.controller('hoverSpy')).toBeDefined();
+        var HoverSpyCtrl = element.controller('hoverSpy');
+        expect(HoverSpyCtrl).toBeDefined();
+        expect(HoverSpyCtrl.addNamespace).toBeDefined();
+        expect(HoverSpyCtrl.addNamespace('exampleMessage', 'exampleNamespace')).toEqual('exampleNamespace:exampleMessage');
+      });
+
+      it('should return the message with ":" prepended to it when an invalid namespace is provided', function () {
+        element = createElement();
+        expect(element.controller('hoverSpy')).toBeDefined();
+        var HoverSpyCtrl = element.controller('hoverSpy');
+        expect(HoverSpyCtrl).toBeDefined();
+        expect(HoverSpyCtrl.addNamespace).toBeDefined();
+        expect(HoverSpyCtrl.addNamespace('exampleMessage')).toEqual('exampleMessage');
+        expect(HoverSpyCtrl.addNamespace('exampleMessage', '')).toEqual('exampleMessage');
+        expect(HoverSpyCtrl.addNamespace('exampleMessage', false)).toEqual('exampleMessage');
+        expect(HoverSpyCtrl.addNamespace('exampleMessage', null)).toEqual('exampleMessage');
+      });
+    });
+
     it('should not have a namespace if one is not provided', function () {
       element = createElement();
       expect(element.controller('hoverSpy')).toBeDefined();
@@ -77,7 +115,7 @@ describe('hover-spy', function () {
       expect(element.controller('hoverSpy')).toBeDefined();
       var HoverSpyCtrl = element.controller('hoverSpy');
       expect(HoverSpyCtrl).toBeDefined();
-      expect($rootScope.$$listeners['provided-namespace:abramz.hover-spy-mouseenter']).toBeDefined();
+      expect($rootScope.$$listeners['provided-namespace:hover-spy-mouseenter']).toBeDefined();
     });
 
     it('should set an event listener on $rootScope for mouseleave', function () {
@@ -85,14 +123,14 @@ describe('hover-spy', function () {
       expect(element.controller('hoverSpy')).toBeDefined();
       var HoverSpyCtrl = element.controller('hoverSpy');
       expect(HoverSpyCtrl).toBeDefined();
-      expect($rootScope.$$listeners['provided-namespace:abramz.hover-spy-mouseleave']).toBeDefined();
+      expect($rootScope.$$listeners['provided-namespace:hover-spy-mouseleave']).toBeDefined();
     });
 
     describe('handleMouseEnter', function () {
       it('should toggle the class in toggle mode', function () {
         element = createElement('provided-namespace', 'toggleClass');
         expect(element.hasClass('toggleClass')).toBe(false);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
       });
@@ -100,7 +138,7 @@ describe('hover-spy', function () {
       it('should reverse toggle the class in toggle mode with a bang (!)', function () {
         element = createElement('provided-namespace', '!toggleClass');
         expect(element.hasClass('toggleClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
       });
@@ -109,7 +147,7 @@ describe('hover-spy', function () {
         element = createElement('provided-namespace', '', 'onClass', 'offClass');
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('onClass')).toBe(true);
         expect(element.hasClass('offClass')).toBe(false);
@@ -120,7 +158,7 @@ describe('hover-spy', function () {
         expect(element.hasClass('toggleClass')).toBe(false);
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
         expect(element.hasClass('onClass')).toBe(true);
@@ -132,7 +170,7 @@ describe('hover-spy', function () {
         expect(element.hasClass('toggleClass')).toBe(true);
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
         expect(element.hasClass('onClass')).toBe(true);
@@ -144,10 +182,10 @@ describe('hover-spy', function () {
       it('should toggle the class in toggle mode', function () {
         element = createElement('provided-namespace', 'toggleClass');
         expect(element.hasClass('toggleClass')).toBe(false);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseleave');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseleave');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
       });
@@ -155,10 +193,10 @@ describe('hover-spy', function () {
       it('should reverse toggle the class in toggle mode with a bang (!)', function () {
         element = createElement('provided-namespace', '!toggleClass');
         expect(element.hasClass('toggleClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseleave');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseleave');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
       });
@@ -167,11 +205,11 @@ describe('hover-spy', function () {
         element = createElement('provided-namespace', '', 'onClass', 'offClass');
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('onClass')).toBe(true);
         expect(element.hasClass('offClass')).toBe(false);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseleave');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseleave');
         scope.$digest();
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
@@ -182,13 +220,13 @@ describe('hover-spy', function () {
         expect(element.hasClass('toggleClass')).toBe(false);
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
         expect(element.hasClass('onClass')).toBe(true);
         expect(element.hasClass('offClass')).toBe(false);
 
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseleave');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseleave');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
         expect(element.hasClass('onClass')).toBe(false);
@@ -200,12 +238,12 @@ describe('hover-spy', function () {
         expect(element.hasClass('toggleClass')).toBe(true);
         expect(element.hasClass('onClass')).toBe(false);
         expect(element.hasClass('offClass')).toBe(true);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseenter');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseenter');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(false);
         expect(element.hasClass('onClass')).toBe(true);
         expect(element.hasClass('offClass')).toBe(false);
-        $rootScope.$emit('provided-namespace:abramz.hover-spy-mouseleave');
+        $rootScope.$emit('provided-namespace:hover-spy-mouseleave');
         scope.$digest();
         expect(element.hasClass('toggleClass')).toBe(true);
         expect(element.hasClass('onClass')).toBe(false);

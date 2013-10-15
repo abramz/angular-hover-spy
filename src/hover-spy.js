@@ -34,36 +34,17 @@
  */
 
 angular.module('abramz.hoverSpy', [])
-  .constant('MODULE_NAMESPACE', 'abramz')
   .constant('MOUSEENTER_EVENT', 'hover-spy-mouseenter')
   .constant('MOUSEENTER_HANDLED_EVENT', 'hover-spy-mouseenter-handled')
   .constant('MOUSELEAVE_EVENT', 'hover-spy-mouseleave')
   .constant('MOUSELEAVE_HANDLED_EVENT', 'hover-spy-mouseleave-handled')
   .directive('hoverSpy', [
-    'MODULE_NAMESPACE',
     'MOUSEENTER_EVENT',
     'MOUSEENTER_HANDLED_EVENT',
     'MOUSELEAVE_EVENT',
     'MOUSELEAVE_HANDLED_EVENT',
-    function (MODULE_NAMESPACE, MOUSEENTER_EVENT, MOUSEENTER_HANDLED_EVENT, MOUSELEAVE_EVENT, MOUSELEAVE_HANDLED_EVENT) {
+    function (MOUSEENTER_EVENT, MOUSEENTER_HANDLED_EVENT, MOUSELEAVE_EVENT, MOUSELEAVE_HANDLED_EVENT) {
       'use strict';
-
-      /**
-       * add a namespace that may or may not exist to a message
-       * @param  string  message   message we are adding the namespace to
-       * @param  string? namespace namespace that may or may not exist
-       * @return string            message with the namespace prepended to it or message
-       */
-
-      var addNamespace = function (message, namespace) {
-        var MODULE_NAMESPACE_SEPARATOR = '.';
-        var NAMESPACE_SEPARATOR = ':';
-
-        if (namespace && namespace.length > 0) {
-          return namespace + NAMESPACE_SEPARATOR + MODULE_NAMESPACE + MODULE_NAMESPACE_SEPARATOR + message;
-        }
-        return message;
-      };
 
       return {
         restrict: 'A', // restrict to attribute only
@@ -75,15 +56,10 @@ angular.module('abramz.hoverSpy', [])
           '$scope',
           function ($log, $rootScope, $scope) {
             /**
-             * whether or not someone tried to set namespace or not
+             * whether or not someone tried to initialize the controller
              * @type {Boolean}
              */
-            var _setNamespace = false;
-            /**
-             * whether or not someone tried to set event listeners or not
-             * @type {Boolean}
-             */
-            var _setEventListeners = false;
+            var _initialized = false;
 
             /**
              * namespace for this controller
@@ -95,21 +71,34 @@ angular.module('abramz.hoverSpy', [])
                 '';
 
             /**
+             * add a namespace that may or may not exist to a message
+             * @param  string  message   message we are adding the namespace to
+             * @param  string? namespace namespace that may or may not exist
+             * @return string            message with the namespace prepended to it or message
+             */
+            this.addNamespace = function (message, namespace) {
+              var NAMESPACE_SEPARATOR = ':';
+
+              if (namespace && namespace.length > 0) {
+                return namespace + NAMESPACE_SEPARATOR + message;
+              }
+              return message;
+            };
+
+            /**
              * initialize controller
              * @param  string namespace namespace for the controller
+             * @return boolean true for success, false for failure
              */
             this.initialize = function (namespace) {
-              if (_setNamespace) {
-                $log.warn('Caller tried to set namespace after it was already set.');
+              if (_initialized) {
+                $log.warn('Caller tried to initialize after it was done already.');
+                return false;
               } else {
-                _setNamespace = true;
+                _initialized = true;
                 setNamespace.call(this, namespace);
-              }
-              if (_setEventListeners) {
-                $log.warn('Caller tried to set event listeners after they were already set.');
-              } else {
-                _setEventListeners = true;
                 setEventListeners.call(this);
+                return true;
               }
             };
 
@@ -122,7 +111,7 @@ angular.module('abramz.hoverSpy', [])
                * @param  Object event event object
                * @param  Object args  argument object
                */
-              $rootScope.$on(addNamespace(MOUSEENTER_EVENT, this.NAMESPACE), function () {
+              $rootScope.$on(this.addNamespace(MOUSEENTER_EVENT, this.NAMESPACE), function () {
                 $scope.handleMouseEnter();
               });
 
@@ -131,7 +120,7 @@ angular.module('abramz.hoverSpy', [])
                * @param  Object event event object
                * @param  Object args  argument object
                */
-              $rootScope.$on(addNamespace(MOUSELEAVE_EVENT, this.NAMESPACE), function() {
+              $rootScope.$on(this.addNamespace(MOUSELEAVE_EVENT, this.NAMESPACE), function() {
                 $scope.handleMouseLeave();
               });
             };
@@ -229,15 +218,19 @@ angular.module('abramz.hoverSpy', [])
            */
           AbramzHoverSpyCtrl.initialize(attrs.hoverSpyNamespace);
 
+          var emit = function (message) {
+            scope.$emit(AbramzHoverSpyCtrl.addNamespace(message, AbramzHoverSpyCtrl.NAMESPACE));
+          };
+
           element.on('mouseenter', function () {
             scope.$apply(function () {
-              scope.$emit(addNamespace(MOUSEENTER_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
+              emit(MOUSEENTER_EVENT);
             });
           });
 
           element.on('mouseleave', function () {
             scope.$apply(function () {
-              scope.$emit(addNamespace(MOUSELEAVE_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
+              emit(MOUSELEAVE_EVENT);
             });
           });
 
@@ -257,7 +250,7 @@ angular.module('abramz.hoverSpy', [])
               switcharoo('on');
               break;
             }
-            scope.$emit(addNamespace(MOUSEENTER_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
+            scope.$emit(AbramzHoverSpyCtrl.addNamespace(MOUSEENTER_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
           };
 
           /**
@@ -276,7 +269,7 @@ angular.module('abramz.hoverSpy', [])
               switcharoo('off');
               break;
             }
-            scope.$emit(addNamespace(MOUSELEAVE_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
+            scope.$emit(AbramzHoverSpyCtrl.addNamespace(MOUSELEAVE_HANDLED_EVENT, AbramzHoverSpyCtrl.NAMESPACE));
           };
         }
       };
