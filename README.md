@@ -2,6 +2,8 @@ Angualr Hover Spy
 ==================
 [![Build Status](https://secure.travis-ci.org/abramz/angular-hover-spy.png)](http://travis-ci.org/abramz/angular-hover-spy)
 
+## NO LONGER MAINTAINED
+
 AngularJS directive that enables spying on 'hover' events (mouseenter and mouseleave)
 
 **Requirements:** AngularJS >1.2 **OR** AngularJS <1.2 **and** jQuery (jQlite in AngularJS 1.0.8 and lower does not support 'element.on' unless jQuery is included on  the page)
